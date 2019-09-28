@@ -59,7 +59,10 @@ Prefer to keep the amount of characters below `80` and hard wrap lines at `90` c
 ### Forbidden Language Constructs
 
 #### Double brace initialization
-Double brace initialization creates an anonymous class with an initializer. This doesn't only increase the possibility of memory leaks, but also adds an useless class definition. Furthermore this construct can only be applied to non-final classes. 
+Double brace initialization creates an anonymous class with an initializer. This doesn't only
+increase the possibility of memory leaks, but also adds an useless class definition. 
+Furthermore this construct can only be applied to non-final classes. 
+
 ```java
 new HashMap<String, Integer>() {{
   put("one", 1);
@@ -88,8 +91,10 @@ public final class Person {
 ```
 
 #### Public constructors
-If there is no strong reason for a public constructor (like framework constraints), don't create one.
-There are several reasons not to use public constructors, Josh Bloch lists the following in his Book Effective Java (Item #1):
+If there is no strong reason for a public constructor (like framework constraints), 
+don't create one. There are several reasons not to use public constructors, 
+Josh Bloch lists the following in his Book Effective Java (Item #1):
+
 [Medium - Effective Java Item 1](https://medium.com/@biratkirat/learning-effective-java-item-1-57f85b93c254)
 
 Create private constructors and use one of the following creators:
@@ -134,8 +139,8 @@ public final class Address {
   }
   
   public static Address createLocalhost(int port) {
-	validatePort(port);
-	return new Address("localhost", port);
+    validatePort(port);
+    return new Address("localhost", port);
   }
   
   private static void validatePort(int port) { ... }
@@ -144,8 +149,8 @@ public final class Address {
 
 ### Object Oriented Programming Anti-Patterns to avoid
 #### Job Names (Anemic Domain Model)
-There are those class names that one comes across in almost every ~~object oriented~~ codebase,
-a few examples are:
+There are those class names that one comes across in almost 
+every ~~object oriented~~ codebase, some examples are:
 
 - `UserManager`
 - `JsonParser`
@@ -155,12 +160,10 @@ A lot of these classes have one single exported method like:
 - `parseJson`
 - `handleRequest`
 
-Whilst others have so many responsibilities, that their name becomes very generic like `Manager` or `Service`.
-But they have something in common, they consist of procedures, operating on data, rather than objects exposing 
-behaviour. And some just have a badly chosen name.
+Whilst others have so many responsibilities, that their name becomes very generic 
+like `Manager` or `Service`. But they have something in common, they consist of procedures,
+operating on data, rather than objects exposing behaviour. And some just have a badly chosen name.
 
 The real problem is not their name but their design. In order to avoid such classes,
 move stop exposing data, move methods closer to the data they operate on and start 
 thinking in objects rather than procedures.
-
-## Examples
