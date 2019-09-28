@@ -1,9 +1,12 @@
 # Vicuna Style Guide
 
 ## Table of Contents
-[1. Motivation](#Motivation)
-[2. Rules](#Rules)
-[3. Examples](#Examples)
+[1. Motivation](#Motivation)   
+
+[2. Rules](#Rules)   
+
+[3. Examples](#Examples)   
+
 
 ## Motivation
 
