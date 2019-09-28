@@ -141,4 +141,26 @@ public final class Address {
   private static void validatePort(int port) { ... }
 }
 ```
+
+### Object Oriented Programming Anti-Patterns to avoid
+#### Job Names (Anemic Domain Model)
+There are those class names that one comes across in almost every ~~object oriented~~ codebase,
+a few examples are:
+
+- `UserManager`
+- `JsonParser`
+- `RequestHandler`
+
+A lot of these classes have one single exported method like:
+- `parseJson`
+- `handleRequest`
+
+Whilst others have so many responsibilities, that their name becomes very generic like `Manager` or `Service`.
+But they have something in common, they consist of procedures, operating on data, rather than objects exposing 
+behaviour. And some just have a badly chosen name.
+
+The real problem is not their name but their design. In order to avoid such classes,
+move stop exposing data, move methods closer to the data they operate on and start 
+thinking in objects rather than procedures.
+
 ## Examples
