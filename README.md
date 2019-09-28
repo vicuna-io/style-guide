@@ -1,6 +1,14 @@
 
 # Vicuna Style Guide
 
+## Project Team
+**Project Founder**
+[@merlinosayimwen](https://github.com/merlinosayimwen)
+
+**Strong Supporters & Contributors**
+[@felixklauke](https://github.com/FelixKlauke)
+[@johanneshaberlah](https://github.com/johanneshaberlah)
+
 ## Table of Contents
 [1. Motivation](#Motivation)   
 
