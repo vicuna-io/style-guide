@@ -7,7 +7,6 @@
 
 [3. Examples](#Examples)   
 
-
 ## Motivation
 
 ## Rules
@@ -49,6 +48,22 @@ void defeatDragon(Dragon dragon) {
     attack(dragon); 
   } 
 } 
+```
+
+#### Max line length
+Prefer to keep the amount of characters below `80` and hard wrap lines at `90` characters.
+
+#### Continuation Indent
+
+### Forbidden Language Constructs
+
+#### Double brace initialization
+Double brace initialization creates an anonymous class with an initializer. This doesn't only increase the possibility of memory leaks, but also adds an useless class definition. Furthermore this construct can only be applied to non-final classes. 
+```java
+new HashMap<String, Integer>() {{
+  put("one", 1);
+  put("two", 2);
+}}; 
 ```
 
 ## Examples
