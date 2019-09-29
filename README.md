@@ -63,6 +63,7 @@ increase the possibility of memory leaks, but also adds an useless class definit
 Furthermore this construct can only be applied to non-final classes. 
 
 ```java
+// BAD
 new HashMap<String, Integer>() {{
   put("one", 1);
   put("two", 2);
