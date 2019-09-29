@@ -1,4 +1,3 @@
-
 # Vicuna Style Guide
 
 ## Table of Contents
@@ -146,6 +145,46 @@ public final class Address {
   private static void validatePort(int port) { ... }
 }
 ```
+
+#### Don't use null
+Using null to represent the absence of a value is not only bad design decision, but also a major source of maintainability and safety problems.  
+Instead of using null, favour returning `Optional` or throwing an exception if the cause of the absent value is an error. Instead of taking null parameters, provide an extra method or overload.   
+An exception to this rule are internal/private methods. When allowing nullable parameters or returning or returning nullable values, use the `@javax.annotation.Nullable`-Annotation. 
+
+#### Don't declare boolean parameters or fields
+Boolean fields and parameters should be used sparingly, as they are not self-documenting.   
+   
+Instead of having a field of type boolean, declare an Enum.   
+
+```java
+// BAD
+public final class Session {
+  private boolean active;
+}
+
+// GOOD
+public final class Session {
+  // Must not be public
+  enum State {
+    ACTIVE,
+    CLOSED;
+  }
+  
+  private State state;
+}
+```   
+Instead of a method having a boolean parameter, split it up into two methods and mark their difference by descriptive names.   
+```java
+// BAD
+void accept(Visitor visitor, boolean recursive);
+
+// GOOD
+void accept(Visitor visitor);
+void acceptRecursive(Visitor visitor);
+```   
+
+Using the method from the bad example, one would write `accept(visitor, true)` and the reader, who may not know the signature of accept, can not infer what `true` causes.    
+When using the method from the good example, the same code would be written as `acceptRecursive(visitor)`, which can be understood without looking at the methods documentation. 
 
 ### Object Oriented Programming Anti-Patterns to avoid
 #### Job Names (Anemic Domain Model)
