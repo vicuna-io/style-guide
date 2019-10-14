@@ -73,7 +73,7 @@ public final class Person {
 public final class Person {
   private final String name;
 
-  publis String getName() {
+  public String getName() {
     return name;
   }
 }
