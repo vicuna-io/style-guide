@@ -84,10 +84,8 @@ public final class Person {
 ### Forbidden Language Constructs
 
 #### Double brace initialization
-Double brace initialization creates an anonymous class with an initializer. This doesn't only
-increase the possibility of memory leaks, but also adds an useless class definition. 
-Furthermore this construct can only be applied to non-final classes. 
-
+Double brace initialization creates an anonymous class with an initializer. This increases the possibility 
+of memory leaks and adds a useless class definition. Furthermore this construct can only be applied to non-final classes. 
 ```java
 // BAD
 new HashMap<String, Integer>() {{
@@ -97,7 +95,7 @@ new HashMap<String, Integer>() {{
 ```
 
 #### Public Fields
-While public fields are easy ways to provide exported properties of a data structure, they can not 
+While public fields are an easy way to provide exported properties of a data structure, they can not 
 be protected against illegal access and may not be removed from a class without breaking its API.
 Prefer accessors to public fields.
 ```java
@@ -118,7 +116,7 @@ public final class Person {
 
 #### Public constructors
 If there is no strong reason for a public constructor (like framework constraints), 
-don't create one. There are several reasons not to use public constructors, 
+don not create one. There are several reasons not to use public constructors, 
 Josh Bloch lists the following in his Book Effective Java (Item #1):
 
 [Medium - Effective Java Item 1](https://medium.com/@biratkirat/learning-effective-java-item-1-57f85b93c254)
@@ -127,7 +125,7 @@ Create private constructors and use one of the following creators:
   
   - Static Factory Method - *When having a few (1-3) fields* 
   - Builder Class - *When having a more fields*
-  - Factory Class - *When the construction of a class is compilated or requires reused dependencies.*
+  - Factory Class - *When the construction of a class is complicated or requires reused dependencies.*
 
 ```java
 // BAD
@@ -174,9 +172,13 @@ public final class Address {
 ```
 
 #### Don't use null
-Using null to represent the absence of a value is not only bad design decision, but also a major source of maintainability and safety problems.  
-Instead of using null, favour returning `Optional` or throwing an exception if the cause of the absent value is an error. Instead of taking null parameters, provide an extra method or overload.   
-An exception to this rule are internal/private methods. When allowing nullable parameters or returning or returning nullable values, use the `@javax.annotation.Nullable`-Annotation. 
+Using null to represent absent values is a bad design decision and leads to maintainability and safety problems.  
+Instead of using null, favour returning `Optional` or throwing an exception if an error caused the value to be absent. 
+
+Instead of taking null parameters, provide an extra method or overload.
+
+Exception to this rule are internal/private methods. 
+When allowing nullable parameters or returning nullable values, use the `@javax.annotation.Nullable`-Annotation. 
 
 #### Don't declare boolean parameters or fields
 Boolean fields and parameters should be used sparingly, as they are not self-documenting.   
