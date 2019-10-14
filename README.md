@@ -58,9 +58,9 @@ Avoid using whitespaces at the beginning and at the end of class and method defi
 
 ```java
 // BAD
-public class Person {
+public final class Person {
 
-  private String name;
+  private final String name;
 
   public String getName() {
     
@@ -70,8 +70,8 @@ public class Person {
 }
 
 // GOOD
-public class Person {
-  private String name;
+public final class Person {
+  private final String name;
 
   publis String getName() {
     return name;
