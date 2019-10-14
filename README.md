@@ -53,6 +53,32 @@ void defeatDragon(Dragon dragon) {
 #### Max line length
 Prefer to keep the amount of characters below `80` and hard wrap lines at `90` characters.
 
+#### White spaces
+Avoid using whitespaces at the beginning and at the end of class and method definitions to reduce the vertical size of our code.
+
+```java
+// BAD
+public class Person {
+
+  private String name;
+
+  publis String getName() {
+    
+    return name;
+  }
+  
+}
+
+// GOOD
+public class Person {
+  private String name;
+
+  publis String getName() {
+    return name;
+  }
+}
+```
+
 #### Continuation Indent
 
 ### Forbidden Language Constructs
