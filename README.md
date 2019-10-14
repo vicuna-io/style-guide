@@ -62,7 +62,7 @@ public class Person {
 
   private String name;
 
-  publis String getName() {
+  public String getName() {
     
     return name;
   }
