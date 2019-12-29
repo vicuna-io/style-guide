@@ -7,6 +7,8 @@
 
 [3. Examples](#Examples)   
 
+[4. Tools](#Tools)
+
 ## Motivation
 
 ## Rules
@@ -235,3 +237,9 @@ operating on data, rather than objects exposing behaviour. And some just have a 
 The real problem is not their name but their design. In order to avoid such classes,
 move stop exposing data, move methods closer to the data they operate on and start 
 thinking in objects rather than procedures.
+
+## Tools
+
+### Checkstyle
+
+We created a simple [checkstyle config](checkstyle.xml) that enforces major rules of our style guide. The config is based on the [google config](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) and should be used as strict as possible (warnings = errors). 
