@@ -242,4 +242,4 @@ thinking in objects rather than procedures.
 
 ### Checkstyle
 
-We created a simple [checkstyle config](checkstyle.xml) that enforces major rules of our style guide. The config is based on the google config and should be used as strict as possible (warnings = errors). 
+We created a simple [checkstyle config](checkstyle.xml) that enforces major rules of our style guide. The config is based on the [google config](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) and should be used as strict as possible (warnings = errors). 
