@@ -13,6 +13,8 @@
 
 ## Rules
 
+### Naming
+
 ### Formatting
 
 Indent using 2 Spaces (including continuous indents)
@@ -35,6 +37,7 @@ void attack(Creature target) {
   } 
 }
 ```
+
 #### Use Blocks whenever applicable
 To improve clarity and prevent bugs like [Apple's goto bug](https://dwheeler.com/essays/apple-goto-fail.html#targetText=On%202014%2D02%2D21%20Apple,fail%20goto%20fail%E2%80%9D%20vulnerability).
 
@@ -55,8 +58,9 @@ void defeatDragon(Dragon dragon) {
 #### Max line length
 Prefer to keep the amount of characters below `80` and hard wrap lines at `90` characters.
 
-#### White spaces
-Avoid using whitespaces at the beginning and at the end of class and method definitions to reduce the vertical size of our code.
+#### Blank Lines
+Avoid using blank line at the beginning and at the end of class and method
+ definitions to reduce the code's vertical size.
 
 ```java
 // BAD
@@ -81,12 +85,35 @@ public final class Person {
 }
 ```
 
-#### Continuation Indent
+#### Whitespaces
+Don't put whitespaces after parentheses and generally use them sparingly.
+Horizontal length is one of the most important properties of clean formatting.
+You should not waste your horizontal space with whitespaces.
+They can also make code harder to read.
+
+You should however put whitespaces after control structure keywords like `if` and `for`.
+
+```java
+// BAD
+Sandwich prepareSandwich( Ingredients ingredients, SandwichRecipe recipe ) {
+  synchronized ( kitchen ) {
+    return recipe.prepare( ingredients ); 
+  }
+}
+
+// GOOD
+Sandwich prepareSandwich(Ingredients ingredients, SandwichRecipe recipe) {
+  synchronized (kitchen) {
+    return recipe.prepare(ingredients);
+  }
+}
+```
 
 ### Forbidden Language Constructs
 
 #### Double brace initialization
-Double brace initialization creates an anonymous class with an initializer. This increases the possibility 
+Double brace initialization creates an anonymous class with an initializer. This in
+ creases the possibility 
 of memory leaks and adds a useless class definition. Furthermore this construct can only be applied to non-final classes. 
 ```java
 // BAD
@@ -218,6 +245,18 @@ Using the method from the bad example, one would write `accept(visitor, true)` a
 When using the method from the good example, the same code would be written as `acceptRecursive(visitor)`, which can be understood without looking at the methods documentation. 
 
 ### Object Oriented Programming Anti-Patterns to avoid
+#### God Object
+God objects know too much and are known to well. They often store 'global variables' or
+dependencies and are referenced to access them in other classes. Sometimes they also
+contain methods that can be thought of as procedures (procedural programming). Those
+objects result in code being harder to test, extend and maintain. Suddenly every class
+will be coupled to this god object. 
+
+Instead use dependency injection and apply the 
+[information expert principle](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design)#Information_expert).
+
+
+
 #### Job Names (Anemic Domain Model)
 There are those class names that one comes across in almost 
 every ~~object oriented~~ codebase, some examples are:
@@ -238,8 +277,65 @@ The real problem is not their name but their design. In order to avoid such clas
 move stop exposing data, move methods closer to the data they operate on and start 
 thinking in objects rather than procedures.
 
-## Tools
+### Other bad practices
+
+#### Anonymous classes instead of lambdas
+Some developers think using anonymous classes instead of lambdas
+would give them some performance benefits.
+This isn't true, at least not for the OpenJDK. While linking time
+may be affected by lambdas, their implementation doesn't really differ from
+that of anonymous classes. They actually define an anonymous class at link-time.
+One difference is, that lambdas, defined in instance methods, won't capture the
+instance variable unless required. Anonymous classes always capture it, resulting
+in a higher chance of memory leaks. Lambdas and especially stateless lambdas can
+be optimized quite well by the JVM. 
+
+One major difference is, that lambdas are much easier to read and don't consume
+the amount of space that anonymous classes do. 
+
+#### Lambdas with blocks
+Lambdas should be small. Try not to define lambdas with more than one statement.
+Instead create a new method and call it from within the lambda.
+
+```java
+// BAD
+shoppingCart.removeIf(item -> {
+  var owned = inventory.lookup(item.id());
+  return owned != null && !owned.isBroken();
+});
+
+// BETTER
+shoppingCart.removeIf(item -> isAlreadyOwned(item));
+
+// BEST
+shoppingCart.removeIf(this::isAlreadyOwned)
+```
+
+#### Magic Numbers
+When looking at someone else's code, one often comes across magic numbers. They
+have a meaning which is often only known by the author. Instead of using magic
+numbers, use number constants.
+
+The only number literals allowed in code are `-1`, `0`, and `1`. Which doesn't
+mean that you shouldn't put them into constants.
+
+```java 
+// BAD
+int reward = ((60 / time) * 100) + (kills * 2);
+
+// GOOD
+int reward = ((TIME_LIMIT / time) * TIME_REWARD) + (kills * KILL_REWARD));
+```
+
+### Principles to follow
+- Design By Contract
+- Law Of Demeter
+- Law of Least Astonishment
+- Command Query Separation (if applicable)
 
 ### Checkstyle
 
-We created a simple [checkstyle config](checkstyle.xml) that enforces major rules of our style guide. The config is based on the [google config](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) and should be used as strict as possible (warnings = errors). 
+We created a simple [checkstyle config](checkstyle.xml) that enforces major rules 
+of our style guide. The config is based on the 
+[google config](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) 
+and should be used as strict as possible (warnings = errors). 
