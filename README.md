@@ -339,3 +339,7 @@ We created a simple [checkstyle config](checkstyle.xml) that enforces major rule
 of our style guide. The config is based on the 
 [google config](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) 
 and should be used as strict as possible (warnings = errors). 
+
+### Editorconfig
+
+We created a simple [.editorconfig](.editorconfig) that will help you formatting your source code. 
