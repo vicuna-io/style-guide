@@ -1,0 +1,26 @@
+  
+dist: bionic
+language: bash
+
+addons:
+  apt:
+    update: true
+    packages:
+      - lmodern
+      - texlive-latex-extra
+      - texlive-generic-recommended
+      - texlive-fonts-recommended
+      - pandoc
+
+jobs:
+  include:
+    - script: pandoc -t latex README.md -o style-guide.pdf
+
+deploy:
+  provider: releases
+  file: style-guide.pdf
+  skip_cleanup: true
+  api_key:
+    secure: CCL6AwXaKpkI7wyeBggonlrwtUfq4tvt5BY3+RvGeci8ZHtvmwKS6hM3dSXZXccGhrH+9wPmpGU47qYH+wZA4VTElzSUloMJ17xcrxrFRnCrU7+dxsoU0Dzp2NY5cmyegalMJz7EtGGuteRETvsHeGvY1kMCjjeVFkxyc9uvWRm6zWYDLKvczLIjPnAn0vnSjC50YWzEpyFR5NlyavgmbT29XXagLLfU26e9V2eaYagDrCM+MeyvYHFSvX4OS4AZtJQ2iLr0vPU0Se+0FXFpI54G0a+ph9M2th+EY1quCacTeKCWvSGzjeHLQNraTEDkl/xRCqseDYWyb5pb0Hn5anTS+OHr51JDTk8zUruKsR1KT4Bf1YvLvcw83lN7xBspC3bhGfL3FkcH45xkLPBUJGn5Xj2VLWCX+z8DwI7UWYdLzBcrlCr1oqcsBRry4aEbIqHBLtecvXSGEmIMlTBT46pE08/TZsPsef4ySu10RE37MSPmZ5k99dfPn+x0UNY+lL5GiY+nXb+m1J2K+GmJwqo6HmsdzyORceRbs/pQ8u1wlaW9ZLqDk7uqA8zzJDx+JfhpkKjG33zba6oEf+5ivwaodwwCGX7MzOPGkq4hYUnoxNvvYfSdISutMzt88P6eIg7f9B4nJgh/F7txUZF6mKECcxGAJt7Sy6JOWcvHv1w=
+  on:
+    tags: true
