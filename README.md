@@ -1,4 +1,4 @@
-# GommeHD.net Style Guide
+# vicuna.io Style Guide
 
 ## Formatting
 
