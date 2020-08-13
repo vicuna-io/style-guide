@@ -161,15 +161,7 @@ public final class Address {
 
 // GOOD
 public final class Address {
-  private final int port;
-  private final String host;
-  
-  private Address(String host, int port) {
-    this.host = host;
-    this.port = port;
-  }
-  
-  public static Address create(String host, int port) {
+   public static Address create(String host, int port) {
     Objects.requireNonNull(host);
     validatePort(port);
     return new Address(host, port);
@@ -181,6 +173,14 @@ public final class Address {
   }
   
   private static void validatePort(int port) { ... }
+  
+  private final int port;
+  private final String host;
+  
+  private Address(String host, int port) {
+    this.host = host;
+    this.port = port;
+  }
 }
 ```
 
