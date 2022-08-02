@@ -93,6 +93,33 @@ Sandwich prepareSandwich(Ingredients ingredients, SandwichRecipe recipe) {
 
 ## Naming
 
+### Outdated Screaming Snake Case
+While Screaming Snake Case had their right to existence in constants and enum names, they are simply not needed these days. They mainly disturb and stand out 
+in the otherwise clean written camelCase or UpperCamelCase language. With modern IDEs it is easy to identify any variable as an enum, constant, class name or anything else without having to change the formatting. Because of that, camelCase constants or UpperCamelCase enums improve the natuaral flow of written language. 
+
+```java
+// BAD
+public enum FallbackPolicy {
+  THROW,
+  LAST_ENTRY,
+  EXPLICIT
+}
+
+// GOD
+public enum  FallbackPolicy {
+  Throw,
+  LastEntry,
+  Explicit
+}
+```
+
+```java
+// BAD
+private static final String FALLBACK_FORMAT = "unknown property: %s";
+
+// GOOD
+private static final String fallbackFormat = "unknown property: %s";
+```
 
 
 ## Forbidden Language Constructs
